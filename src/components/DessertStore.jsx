@@ -103,7 +103,7 @@ function DessertStore() {
           })}
         </div>
 
-        <div className="bg-white rounded-lg shadow-lg p-8 space-y-6">
+        <div className="bg-white rounded-lg shadow-lg p-8 space-y-6 h-fit">
           <h2 className="text-Red font-bold text-2xl">
             Your Cart ({cart.length})
           </h2>
