@@ -182,11 +182,15 @@ function DessertStore() {
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end md:items-center justify-center">
           <div className="bg-white gap-6 p-6 rounded-t-lg md:rounded-lg shadow-lg flex flex-col items-center md:max-w-xl w-full">
-          <div className="flex flex-col gap-2 items-start w-full">
-          <img src={orderConfirmed} alt="" />
-          <h2 className="text-2xl font-semibold w-full text-start">Order Confirmed</h2>
-          <span className="w-full text-start">We hope you enjoy your last supper!</span>
-          </div>
+            <div className="flex flex-col gap-2 items-start w-full">
+              <img src={orderConfirmed} alt="" />
+              <h2 className="text-2xl font-bold w-full text-start">
+                Order Confirmed
+              </h2>
+              <span className="w-full text-start text-gray-400">
+                We hope you enjoy your last supper!
+              </span>
+            </div>
             <div className="space-y-2 bg-Rose_2 rounded p-3 w-full">
               {cart.map((item) => (
                 <div
@@ -194,14 +198,18 @@ function DessertStore() {
                   className="flex w-full items-center justify-between border-b border-Rose_3 p-2"
                 >
                   <div className="flex items-center justify-center gap-3">
-                    <img src={item?.image?.desktop} alt="" className="w-12 md:w-16 rounded" />
+                    <img
+                      src={item?.image?.desktop}
+                      alt=""
+                      className="w-12 md:w-16 rounded"
+                    />
                     <div className="flex flex-col gap-1">
-                      <span>{item?.name}</span>
-                      <div className="flex items-center gap-2">
+                      <span className="font-semibold">{item?.name}</span>
+                      <div className="flex items-center gap-4">
                         <span className="text-orange-700 font-bold">
                           {item?.quantity}x
                         </span>
-                        <span>@ ${item?.price}</span>
+                        <span className="text-gray-400">@ ${item?.price}</span>
                       </div>
                     </div>
                   </div>
