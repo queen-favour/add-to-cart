@@ -53,6 +53,11 @@ function DessertStore() {
     setIsModalOpen(true);
   };
 
+  const resetOrder = () => {
+    setCart([]);
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="bg-Rose_1 min-h-screen py-16 px-8">
       <h1 className="font-bold text-4xl mb-12">Desserts</h1>
@@ -188,7 +193,7 @@ function DessertStore() {
                 Order Confirmed
               </h2>
               <span className="w-full text-start text-gray-400">
-                We hope you enjoy your last supper!
+                We hope you enjoy your food!
               </span>
             </div>
             <div className="space-y-2 bg-Rose_2 rounded p-3 w-full">
@@ -233,7 +238,7 @@ function DessertStore() {
             </div>
             <button
               className="w-full cursor-pointer bg-Red text-white py-2 px-12 rounded-full"
-              onClick={() => setIsModalOpen(false)}
+              onClick={resetOrder}
             >
               Start New Order
             </button>
