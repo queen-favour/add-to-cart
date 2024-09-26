@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { data } from "../data";
+import emptyCart from "../assets/images/illustration-empty-cart.svg";
+import orderConfirmed from "../assets/images/icon-order-confirmed.svg";
 import { MdOutlineAddShoppingCart, MdRemove, MdAdd } from "react-icons/md";
 
 function DessertStore() {
@@ -54,9 +56,8 @@ function DessertStore() {
   return (
     <div className="bg-Rose_1 min-h-screen py-16 px-8">
       <h1 className="font-bold text-4xl mb-12">Desserts</h1>
-
-      <div className="grid grid-cols-4 gap-8">
-        <div className="col-span-3 grid grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-4 gap-8 items-center md:items-start">
+        <div className="md:col-span-3 grid md:grid-cols-3 gap-8">
           {data.map((item, index) => {
             const inCart = cart.find((cartItem) => cartItem.name === item.name);
             return (
@@ -166,31 +167,64 @@ function DessertStore() {
               </button>
             </>
           ) : (
-            <p className="text-center text-gray-500">Your cart is empty.</p>
+            <>
+              <div className="flex flex-col items-center justify-center">
+                <img src={emptyCart} alt="" />
+                <p className="text-center text-gray-500">
+                  Your added items will appear here.
+                </p>
+              </div>
+            </>
           )}
         </div>
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-12 rounded-lg shadow-lg">
-            <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-            <ul className="space-y-2">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end md:items-center justify-center">
+          <div className="bg-white gap-6 p-6 rounded-t-lg md:rounded-lg shadow-lg flex flex-col items-center md:max-w-xl w-full">
+          <div className="flex flex-col gap-2 items-start w-full">
+          <img src={orderConfirmed} alt="" />
+          <h2 className="text-2xl font-semibold w-full text-start">Order Confirmed</h2>
+          <span className="w-full text-start">We hope you enjoy your last supper!</span>
+          </div>
+            <div className="space-y-2 bg-Rose_2 rounded p-3 w-full">
               {cart.map((item) => (
-                <li key={item.name}>
-                  {item.quantity} x {item.name} - $
-                  {(item.price * item.quantity).toFixed(2)}
-                </li>
+                <div
+                  key={item.name}
+                  className="flex w-full items-center justify-between border-b border-Rose_3 p-2"
+                >
+                  <div className="flex items-center justify-center gap-3">
+                    <img src={item?.image?.desktop} alt="" className="w-12 md:w-16 rounded" />
+                    <div className="flex flex-col gap-1">
+                      <span>{item?.name}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-orange-700 font-bold">
+                          {item?.quantity}x
+                        </span>
+                        <span>@ ${item?.price}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span className="font-semibold">
+                    ${(item.price * item.quantity).toFixed(2)}
+                  </span>
+                </div>
               ))}
-            </ul>
-            <p className="mt-4 font-semibold">
-              Total: $
-              {cart
-                .reduce((total, item) => total + item.price * item.quantity, 0)
-                .toFixed(2)}
-            </p>
+              <div className="flex items-center justify-between">
+                <span>Order Total:</span>
+                <span>
+                  $
+                  {cart
+                    .reduce(
+                      (total, item) => total + item.price * item.quantity,
+                      0
+                    )
+                    .toFixed(2)}
+                </span>
+              </div>
+            </div>
             <button
-              className=" cursor-pointer mt-4 bg-Red text-white py-2 px-12 rounded-full"
+              className="w-full cursor-pointer bg-Red text-white py-2 px-12 rounded-full"
               onClick={() => setIsModalOpen(false)}
             >
               Start New Order
